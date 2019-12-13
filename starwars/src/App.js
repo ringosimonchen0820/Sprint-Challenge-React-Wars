@@ -26,6 +26,13 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
+      {
+        charData.map(items => {
+          return (
+            <StarWarsCard dataSets = {items}/>
+          )
+        })
+      }
     </div>
   );
 }

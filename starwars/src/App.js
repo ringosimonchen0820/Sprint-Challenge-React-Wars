@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import StarWarsCard from './components/StarWarsCard';
 import styled from 'styled-components';
+import {Button} from '@material-ui/core';
 
 const MainContainer = styled.div`
   text-align: center;
@@ -25,8 +26,16 @@ const App = () => {
 
   const [charData, setCharData] = useState([]);
 
+  const [pageState, setPageState] = useState(1);
+
+  function changePage(change){
+    let newPage = pageState + change;
+    if (newPage === 0) newPage = 1;
+    setPageState(newPage);
+  }
+
   useEffect( () => {
-    axios.get('https://swapi.co/api/people/')
+    axios.get(`https://swapi.co/api/people/?page=${pageState}`)
     .then(res => {
       console.log(res.data.results);
       setCharData(res.data.results);
@@ -34,13 +43,19 @@ const App = () => {
     .catch(error => {
       console.log("Error", error)
     })
-  },[])
+  },[pageState])
+
+  
 
   return (
-    <div className="App">
+     <div className="App">
       <MainContainer>
         
         <MainHeader>React Wars</MainHeader>
+        
+        <Button onClick={() => changePage(-1)} disabled={pageState <= 1}> {'Prev'}</Button>
+        <Button onClick={() => changePage(+1)} disabled={pageState >= 9}> {'Next'}</Button>
+       
         
         {
           charData.map(items => {
@@ -51,7 +66,7 @@ const App = () => {
         }
 
       </MainContainer>
-    </div>
+     </div>
   );
 }
 

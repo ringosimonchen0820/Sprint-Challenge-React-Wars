@@ -21,7 +21,7 @@ function StarWarsCard(props) {
         return (
             axios.get(`${items}`)
             .then(res => {
-                console.log(res.data.title)
+                //console.log(res.data.title)
                 willy.push(res.data.title)
             })
             .catch(error => {
@@ -54,10 +54,6 @@ function StarWarsCard(props) {
                 <p>Height: {props.dataSets.height}-cm</p>
 
                 <p># of Films: {props.dataSets.films.length}</p>
-
-                <p># of Vehicles: {props.dataSets.vehicles.length}</p>
-
-                <p># of Starships: {props.dataSets.starships.length}</p>
             </CardContainer>
         </div>
     )

@@ -5,7 +5,15 @@ function StarWarsFilms(props){
 
      return(
           <>
-          <div>{props.film}</div>
+          <div>
+            {
+                props.film.map(titleName => {
+                    return(
+                        <h1>Movies: {titleName}</h1>
+                    )
+                })
+            }
+          </div>
           </>
      )
 }
